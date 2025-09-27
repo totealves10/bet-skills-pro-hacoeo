@@ -7,10 +7,13 @@ export const colors = {
   accent: '#10B981',       // Emerald
   background: '#FFFFFF',   // White background
   backgroundAlt: '#F8FAFC', // Light gray background
+  backgroundGradientStart: '#F0FDF4', // Very light green
+  backgroundGradientEnd: '#FAFAFA',   // Very light gray
   text: '#1F2937',         // Dark gray text
   textSecondary: '#6B7280', // Medium gray text
   grey: '#E5E7EB',         // Light gray
   card: '#FFFFFF',         // White card background
+  cardShadow: 'rgba(34, 197, 94, 0.08)', // Green tinted shadow
   border: '#E5E7EB',       // Border color
   warning: '#F59E0B',      // Amber warning
   error: '#EF4444',        // Red error
@@ -56,9 +59,17 @@ export const commonStyles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: 'transparent',
     width: '100%',
     height: '100%',
+  },
+  gradientBackground: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    background: `linear-gradient(135deg, ${colors.backgroundGradientStart} 0%, ${colors.backgroundGradientEnd} 100%)`,
   },
   content: {
     flex: 1,
@@ -99,7 +110,7 @@ export const commonStyles = StyleSheet.create({
     borderRadius: 12,
     padding: 20,
     marginVertical: 8,
-    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
+    boxShadow: `0px 4px 16px ${colors.cardShadow}`,
     elevation: 3,
     borderWidth: 1,
     borderColor: colors.border,
@@ -109,10 +120,19 @@ export const commonStyles = StyleSheet.create({
     borderRadius: 16,
     padding: 24,
     marginVertical: 12,
-    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    boxShadow: `0px 8px 24px ${colors.cardShadow}`,
     elevation: 4,
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  heroCard: {
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+    padding: 32,
+    marginVertical: 12,
+    boxShadow: `0px 12px 32px rgba(34, 197, 94, 0.25)`,
+    elevation: 6,
+    alignItems: 'center',
   },
   priceTag: {
     backgroundColor: colors.primary,
@@ -138,5 +158,13 @@ export const commonStyles = StyleSheet.create({
   centerContent: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  statsContainer: {
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 24,
+    marginVertical: 12,
+    boxShadow: `0px 6px 20px ${colors.cardShadow}`,
+    elevation: 4,
   },
 });

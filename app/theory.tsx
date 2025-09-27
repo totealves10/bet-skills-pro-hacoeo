@@ -6,115 +6,119 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import Icon from '../components/Icon';
 import SimpleBottomSheet from '../components/BottomSheet';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function TheoryScreen() {
-  const [isPurchaseSheetVisible, setIsPurchaseSheetVisible] = useState(false);
+  const [selectedModule, setSelectedModule] = useState<any>(null);
+  const [showEnrollSheet, setShowEnrollSheet] = useState(false);
 
   const courseModules = [
     {
+      id: 1,
       title: 'Betting Fundamentals',
       duration: '2 hours',
       lessons: 8,
+      description: 'Learn the basic concepts and terminology of sports betting',
       topics: [
         'Understanding odds and probability',
         'Types of bets explained',
         'Reading betting markets',
-        'Basic terminology'
+        'Basic bankroll management'
       ]
     },
     {
-      title: 'Bankroll Management',
-      duration: '1.5 hours',
-      lessons: 6,
+      id: 2,
+      title: 'Statistical Analysis',
+      duration: '3 hours',
+      lessons: 12,
+      description: 'Master the art of analyzing sports data and statistics',
       topics: [
-        'Setting your betting budget',
-        'Unit sizing strategies',
-        'Risk management principles',
-        'Long-term sustainability'
+        'Key performance indicators',
+        'Historical data analysis',
+        'Trend identification',
+        'Statistical modeling basics'
       ]
     },
     {
+      id: 3,
       title: 'Value Betting',
       duration: '2.5 hours',
       lessons: 10,
+      description: 'Identify and capitalize on value opportunities in betting markets',
       topics: [
-        'Identifying value in odds',
-        'Expected value calculations',
-        'Market inefficiencies',
-        'Comparative analysis'
+        'What is value betting?',
+        'Calculating expected value',
+        'Finding market inefficiencies',
+        'Value betting strategies'
       ]
     },
     {
+      id: 4,
+      title: 'Risk Management',
+      duration: '2 hours',
+      lessons: 9,
+      description: 'Protect your bankroll with advanced risk management techniques',
+      topics: [
+        'Kelly Criterion explained',
+        'Position sizing strategies',
+        'Diversification techniques',
+        'Loss management psychology'
+      ]
+    },
+    {
+      id: 5,
       title: 'Advanced Strategies',
-      duration: '3 hours',
-      lessons: 12,
+      duration: '4 hours',
+      lessons: 15,
+      description: 'Professional betting strategies used by successful bettors',
       topics: [
         'Arbitrage betting',
-        'Hedging strategies',
-        'Live betting tactics',
-        'System betting approaches'
+        'Matched betting',
+        'Trading strategies',
+        'Live betting techniques'
       ]
     },
     {
+      id: 6,
       title: 'Psychology & Discipline',
       duration: '1.5 hours',
-      lessons: 7,
+      lessons: 6,
+      description: 'Master the mental game of professional betting',
       topics: [
         'Emotional control',
         'Avoiding common biases',
-        'Maintaining discipline',
-        'Handling losses'
-      ]
-    },
-    {
-      title: 'Sports Analysis',
-      duration: '2 hours',
-      lessons: 9,
-      topics: [
-        'Statistical analysis methods',
-        'Form and performance metrics',
-        'Team and player analysis',
-        'Market movement interpretation'
+        'Discipline strategies',
+        'Long-term mindset'
       ]
     }
   ];
 
-  const courseFeatures = [
-    {
-      icon: 'play-circle-outline',
-      title: 'Video Lessons',
-      description: '40+ high-quality video lessons with practical examples'
-    },
-    {
-      icon: 'document-text-outline',
-      title: 'PDF Materials',
-      description: 'Comprehensive guides and cheat sheets for quick reference'
-    },
-    {
-      icon: 'help-circle-outline',
-      title: 'Interactive Quizzes',
-      description: 'Test your knowledge with quizzes after each module'
-    },
-    {
-      icon: 'ribbon-outline',
-      title: 'Certificate',
-      description: 'Receive a completion certificate upon finishing the course'
-    },
-    {
-      icon: 'time-outline',
-      title: 'Lifetime Access',
-      description: 'Access course materials anytime, anywhere, forever'
-    },
-    {
-      icon: 'chatbubbles-outline',
-      title: 'Community Access',
-      description: 'Join our exclusive community of betting enthusiasts'
-    }
-  ];
+  const courseStats = {
+    totalDuration: '15 hours',
+    totalLessons: 60,
+    totalModules: 6,
+    certificate: true
+  };
+
+  const handleEnrollCourse = () => {
+    console.log('Enrolling in betting theory course');
+    setShowEnrollSheet(true);
+  };
+
+  const handleModuleSelect = (module: any) => {
+    console.log('Selected module:', module.title);
+    setSelectedModule(module);
+  };
 
   return (
-    <SafeAreaView style={commonStyles.container}>
-      <ScrollView style={commonStyles.content} showsVerticalScrollIndicator={false}>
+    <View style={commonStyles.container}>
+      <LinearGradient
+        colors={[colors.backgroundGradientStart, colors.backgroundGradientEnd]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={commonStyles.gradientBackground}
+      />
+      <SafeAreaView style={{ flex: 1 }}>
         {/* Header */}
         <View style={commonStyles.header}>
           <Link href="/" asChild>
@@ -127,239 +131,211 @@ export default function TheoryScreen() {
           <View style={{ width: 60 }} />
         </View>
 
-        {/* Hero Section */}
-        <View style={[commonStyles.section, { paddingTop: 32 }]}>
-          <View style={[commonStyles.card, { backgroundColor: colors.backgroundAlt, alignItems: 'center' }]}>
-            <Icon name="school-outline" size={64} color={colors.primary} />
-            <Text style={[commonStyles.title, { textAlign: 'center', marginTop: 16 }]}>
-              Complete Betting Course
-            </Text>
-            <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginTop: 8 }]}>
-              Master the theoretical foundations of professional betting with our comprehensive course
-            </Text>
-            <View style={[commonStyles.priceTag, { marginTop: 16 }]}>
-              <Text style={[commonStyles.priceText, { fontSize: 20 }]}>$149</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Course Overview */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Course Overview</Text>
-          
-          <View style={commonStyles.card}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
-              <View style={commonStyles.centerContent}>
-                <Text style={[commonStyles.title, { color: colors.primary }]}>12+</Text>
-                <Text style={commonStyles.textSecondary}>Hours Content</Text>
-              </View>
-              <View style={commonStyles.centerContent}>
-                <Text style={[commonStyles.title, { color: colors.primary }]}>52</Text>
-                <Text style={commonStyles.textSecondary}>Video Lessons</Text>
-              </View>
-              <View style={commonStyles.centerContent}>
-                <Text style={[commonStyles.title, { color: colors.primary }]}>6</Text>
-                <Text style={commonStyles.textSecondary}>Modules</Text>
-              </View>
-            </View>
-            
-            <TouchableOpacity 
-              style={buttonStyles.primary}
-              onPress={() => setIsPurchaseSheetVisible(true)}
-            >
-              <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
-                Enroll Now - $149
+        <ScrollView style={commonStyles.content} showsVerticalScrollIndicator={false}>
+          {/* Hero Section */}
+          <View style={[commonStyles.section, { paddingVertical: 32 }]}>
+            <View style={commonStyles.heroCard}>
+              <Icon name="school-outline" size={48} color={colors.background} />
+              <Text style={[commonStyles.subtitle, { color: colors.background, textAlign: 'center', marginTop: 16 }]}>
+                Complete Betting Course
               </Text>
-            </TouchableOpacity>
+              <Text style={[commonStyles.textSecondary, { color: colors.background, textAlign: 'center', marginTop: 8 }]}>
+                Master professional betting with our comprehensive theory course
+              </Text>
+            </View>
           </View>
-        </View>
 
-        {/* Course Modules */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Course Modules</Text>
-          
-          {courseModules.map((module, index) => (
-            <View key={index} style={[commonStyles.card, { marginBottom: 16 }]}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                <View style={{ flex: 1 }}>
-                  <Text style={[commonStyles.text, { fontWeight: '600' }]}>
-                    Module {index + 1}: {module.title}
+          {/* Course Overview */}
+          <View style={commonStyles.section}>
+            <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Course Overview</Text>
+            
+            <View style={commonStyles.statsContainer}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>
+                    {courseStats.totalModules}
                   </Text>
-                  <Text style={[commonStyles.textSecondary, { marginTop: 4 }]}>
-                    {module.duration} • {module.lessons} lessons
+                  <Text style={commonStyles.textSecondary}>Modules</Text>
+                </View>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>
+                    {courseStats.totalLessons}
+                  </Text>
+                  <Text style={commonStyles.textSecondary}>Lessons</Text>
+                </View>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>
+                    {courseStats.totalDuration}
+                  </Text>
+                  <Text style={commonStyles.textSecondary}>Duration</Text>
+                </View>
+              </View>
+              
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Icon name="ribbon-outline" size={20} color={colors.primary} />
+                <Text style={[commonStyles.text, { marginLeft: 8, fontWeight: '600' }]}>
+                  Certificate of Completion Included
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Course Modules */}
+          <View style={commonStyles.section}>
+            <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Course Modules</Text>
+            
+            {courseModules.map((module) => (
+              <TouchableOpacity 
+                key={module.id} 
+                style={[
+                  commonStyles.serviceCard,
+                  selectedModule?.id === module.id && { borderColor: colors.primary, borderWidth: 2 }
+                ]}
+                onPress={() => handleModuleSelect(module)}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 16 }}>
+                  <View style={{ 
+                    backgroundColor: colors.backgroundGradientStart, 
+                    padding: 12, 
+                    borderRadius: 12, 
+                    marginRight: 16,
+                    minWidth: 48,
+                    alignItems: 'center'
+                  }}>
+                    <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '700' }]}>
+                      {module.id}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={commonStyles.subtitle}>{module.title}</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 4 }}>
+                      <Text style={[commonStyles.textSecondary, { marginRight: 16 }]}>
+                        {module.duration}
+                      </Text>
+                      <Text style={commonStyles.textSecondary}>
+                        {module.lessons} lessons
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <Text style={[commonStyles.text, { marginBottom: 16 }]}>
+                  {module.description}
+                </Text>
+                
+                <View style={{ marginBottom: 16 }}>
+                  <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
+                    Topics Covered:
+                  </Text>
+                  {module.topics.map((topic, index) => (
+                    <View key={index} style={{ 
+                      flexDirection: 'row', 
+                      alignItems: 'center', 
+                      marginBottom: 6 
+                    }}>
+                      <Icon name="play-circle-outline" size={14} color={colors.primary} />
+                      <Text style={[commonStyles.textSecondary, { marginLeft: 8, flex: 1 }]}>
+                        {topic}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          {/* Pricing */}
+          <View style={[commonStyles.section, { paddingVertical: 32 }]}>
+            <View style={commonStyles.serviceCard}>
+              <View style={{ alignItems: 'center', marginBottom: 24 }}>
+                <Text style={[commonStyles.subtitle, { marginBottom: 8 }]}>
+                  Complete Course Access
+                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+                  <Text style={[commonStyles.title, { color: colors.primary, fontSize: 32 }]}>
+                    $149
+                  </Text>
+                  <Text style={[commonStyles.textSecondary, { marginLeft: 8 }]}>
+                    one-time payment
                   </Text>
                 </View>
               </View>
               
-              <View>
-                <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
-                  What you&apos;ll learn:
+              <View style={{ marginBottom: 24 }}>
+                <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 12 }]}>
+                  What You Get:
                 </Text>
-                {module.topics.map((topic, topicIndex) => (
-                  <View key={topicIndex} style={{ 
+                {[
+                  'Lifetime access to all modules',
+                  'HD video lessons',
+                  'Downloadable PDF materials',
+                  'Interactive quizzes',
+                  'Certificate of completion',
+                  'Private student community',
+                  'Monthly live Q&A sessions'
+                ].map((feature, index) => (
+                  <View key={index} style={{ 
                     flexDirection: 'row', 
                     alignItems: 'center', 
-                    marginBottom: 6 
+                    marginBottom: 8 
                   }}>
                     <Icon name="checkmark-circle-outline" size={16} color={colors.success} />
                     <Text style={[commonStyles.textSecondary, { marginLeft: 8, flex: 1 }]}>
-                      {topic}
+                      {feature}
                     </Text>
                   </View>
                 ))}
               </View>
-            </View>
-          ))}
-        </View>
-
-        {/* Course Features */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>What&apos;s Included</Text>
-          
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            {courseFeatures.map((feature, index) => (
-              <View key={index} style={[commonStyles.card, { 
-                width: '48%', 
-                marginBottom: 16,
-                paddingVertical: 20,
-                alignItems: 'center'
-              }]}>
-                <Icon name={feature.icon as any} size={32} color={colors.primary} />
-                <Text style={[commonStyles.text, { fontWeight: '600', textAlign: 'center', marginTop: 12 }]}>
-                  {feature.title}
+              
+              <TouchableOpacity 
+                style={buttonStyles.primary}
+                onPress={handleEnrollCourse}
+              >
+                <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
+                  Enroll Now
                 </Text>
-                <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginTop: 8 }]}>
-                  {feature.description}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        {/* Student Success */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Student Success Stories</Text>
-          
-          <View style={commonStyles.card}>
-            <View style={{ flexDirection: 'row', marginBottom: 12 }}>
-              {[...Array(5)].map((_, starIndex) => (
-                <Icon key={starIndex} name="star" size={16} color={colors.warning} style={{ marginRight: 2 }} />
-              ))}
+              </TouchableOpacity>
             </View>
-            <Text style={[commonStyles.text, { marginBottom: 12, fontStyle: 'italic' }]}>
-              &quot;This course completely transformed my understanding of betting. The theoretical foundation 
-              helped me develop a systematic approach that increased my success rate by 60%.&quot;
-            </Text>
-            <Text style={[commonStyles.textSecondary, { fontWeight: '600' }]}>
-              - Alex Rodriguez, Course Graduate
-            </Text>
           </View>
-          
-          <View style={[commonStyles.card, { marginTop: 16 }]}>
-            <View style={{ flexDirection: 'row', marginBottom: 12 }}>
-              {[...Array(5)].map((_, starIndex) => (
-                <Icon key={starIndex} name="star" size={16} color={colors.warning} style={{ marginRight: 2 }} />
-              ))}
-            </View>
-            <Text style={[commonStyles.text, { marginBottom: 12, fontStyle: 'italic' }]}>
-              &quot;The psychology module was a game-changer. Learning to control emotions and maintain 
-              discipline has been crucial to my long-term success.&quot;
-            </Text>
-            <Text style={[commonStyles.textSecondary, { fontWeight: '600' }]}>
-              - Maria Santos, Professional Bettor
-            </Text>
-          </View>
-        </View>
 
-        {/* FAQ */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Frequently Asked Questions</Text>
-          
-          <View style={commonStyles.card}>
-            <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
-              How long do I have access to the course?
-            </Text>
-            <Text style={[commonStyles.textSecondary, { marginBottom: 16 }]}>
-              You have lifetime access to all course materials, including any future updates.
+          {/* Bottom padding */}
+          <View style={{ height: 40 }} />
+        </ScrollView>
+
+        {/* Enrollment Bottom Sheet */}
+        <SimpleBottomSheet
+          isVisible={showEnrollSheet}
+          onClose={() => setShowEnrollSheet(false)}
+        >
+          <View style={{ padding: 20 }}>
+            <Text style={[commonStyles.subtitle, { textAlign: 'center', marginBottom: 16 }]}>
+              Enroll in Course
             </Text>
             
-            <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
-              Is this suitable for beginners?
-            </Text>
-            <Text style={[commonStyles.textSecondary, { marginBottom: 16 }]}>
-              Absolutely! The course starts with fundamentals and progressively covers advanced topics.
+            <View style={[commonStyles.card, { marginBottom: 20 }]}>
+              <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
+                Betting Theory Complete Course
+              </Text>
+              <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600', marginBottom: 8 }]}>
+                $149 - One-time payment
+              </Text>
+              <Text style={commonStyles.textSecondary}>
+                Lifetime access to all {courseStats.totalLessons} lessons across {courseStats.totalModules} modules
+              </Text>
+            </View>
+            
+            <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginBottom: 20 }]}>
+              Ready to master professional betting? Contact us to enroll and get instant access to the complete course.
             </Text>
             
-            <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
-              Do you offer a money-back guarantee?
-            </Text>
-            <Text style={commonStyles.textSecondary}>
-              Yes, we offer a 30-day money-back guarantee if you&apos;re not satisfied with the course.
-            </Text>
-          </View>
-        </View>
-
-        {/* Bottom CTA */}
-        <View style={[commonStyles.section, { paddingBottom: 40 }]}>
-          <View style={[commonStyles.card, { backgroundColor: colors.primary, alignItems: 'center' }]}>
-            <Text style={[commonStyles.subtitle, { color: colors.background, textAlign: 'center', marginBottom: 12 }]}>
-              Ready to Master Betting Theory?
-            </Text>
-            <Text style={[commonStyles.textSecondary, { color: colors.background, textAlign: 'center', marginBottom: 20 }]}>
-              Join hundreds of successful students who have transformed their betting approach
-            </Text>
-            <TouchableOpacity 
-              style={[buttonStyles.primary, { backgroundColor: colors.background }]}
-              onPress={() => setIsPurchaseSheetVisible(true)}
-            >
-              <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600' }]}>
-                Enroll Now - $149
+            <TouchableOpacity style={buttonStyles.primary}>
+              <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
+                Complete Enrollment
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </ScrollView>
-
-      {/* Purchase Bottom Sheet */}
-      <SimpleBottomSheet
-        isVisible={isPurchaseSheetVisible}
-        onClose={() => setIsPurchaseSheetVisible(false)}
-      >
-        <View style={{ padding: 20 }}>
-          <Text style={[commonStyles.subtitle, { textAlign: 'center', marginBottom: 20 }]}>
-            Enroll in the Course
-          </Text>
-          
-          <View style={[commonStyles.card, { backgroundColor: colors.backgroundAlt, marginBottom: 20 }]}>
-            <Icon name="school-outline" size={32} color={colors.primary} style={{ alignSelf: 'center', marginBottom: 12 }} />
-            <Text style={[commonStyles.text, { textAlign: 'center', marginBottom: 8, fontWeight: '600' }]}>
-              Complete Betting Theory Course
-            </Text>
-            <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginBottom: 12 }]}>
-              12+ hours of content • 52 lessons • Lifetime access
-            </Text>
-            <Text style={[commonStyles.title, { color: colors.primary, textAlign: 'center' }]}>
-              $149
-            </Text>
-          </View>
-          
-          <TouchableOpacity style={[buttonStyles.primary, { marginBottom: 12 }]}>
-            <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
-              Purchase Course
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={buttonStyles.outline}>
-            <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600' }]}>
-              Preview Sample Lesson
-            </Text>
-          </TouchableOpacity>
-          
-          <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginTop: 16, fontSize: 12 }]}>
-            30-day money-back guarantee • Secure payment processing
-          </Text>
-        </View>
-      </SimpleBottomSheet>
-    </SafeAreaView>
+        </SimpleBottomSheet>
+      </SafeAreaView>
+    </View>
   );
 }

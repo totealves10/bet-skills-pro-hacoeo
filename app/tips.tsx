@@ -6,49 +6,59 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import Icon from '../components/Icon';
 import SimpleBottomSheet from '../components/BottomSheet';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function TipsScreen() {
-  const [isSubscriptionSheetVisible, setIsSubscriptionSheetVisible] = useState(false);
+  const [selectedTier, setSelectedTier] = useState<any>(null);
+  const [showSubscriptionSheet, setShowSubscriptionSheet] = useState(false);
 
-  const subscriptionPlans = [
+  const subscriptionTiers = [
     {
+      id: 'basic',
       title: 'Basic Tips',
-      price: '$29/month',
-      description: 'Daily betting tips with basic analysis',
+      price: '$29',
+      period: '/month',
+      description: 'Essential daily betting tips with basic analysis',
       features: [
         '3-5 daily tips',
         'Basic match analysis',
         'Win/Loss tracking',
         'Email delivery',
-        'Mobile app access'
+        'Mobile notifications'
       ],
       popular: false
     },
     {
+      id: 'premium',
       title: 'Premium Tips',
-      price: '$49/month',
-      description: 'Enhanced tips with detailed analysis and multiple sports',
+      price: '$59',
+      period: '/month',
+      description: 'Advanced tips with detailed analysis and multiple sports',
       features: [
-        '5-8 daily tips',
-        'Detailed analysis',
+        '8-12 daily tips',
+        'Detailed statistical analysis',
         'Multiple sports coverage',
         'Live updates',
-        'Priority support',
-        'Historical data access'
+        'Telegram group access',
+        'Weekly performance reports',
+        'Risk assessment'
       ],
       popular: true
     },
     {
+      id: 'vip',
       title: 'VIP Package',
-      price: '$99/month',
-      description: 'Complete package with exclusive tips and personal consultation',
+      price: '$99',
+      period: '/month',
+      description: 'Premium tips plus exclusive access and personal support',
       features: [
-        '8-12 daily tips',
-        'Exclusive VIP tips',
-        'Personal consultation',
-        'Custom strategies',
-        'Direct messaging',
-        'Weekly strategy calls'
+        'Everything in Premium',
+        '15+ daily tips',
+        'Exclusive high-value bets',
+        'Personal WhatsApp support',
+        'Live betting guidance',
+        'Monthly strategy calls',
+        'Custom bet requests'
       ],
       popular: false
     }
@@ -57,7 +67,6 @@ export default function TipsScreen() {
   const sampleTips = [
     {
       match: 'Manchester United vs Liverpool',
-      sport: 'Football',
       tip: 'Over 2.5 Goals',
       odds: '1.85',
       confidence: 'High',
@@ -65,24 +74,35 @@ export default function TipsScreen() {
     },
     {
       match: 'Lakers vs Warriors',
-      sport: 'Basketball',
       tip: 'Lakers +5.5',
       odds: '1.90',
       confidence: 'Medium',
       analysis: 'Lakers playing at home with key players returning from injury.'
+    },
+    {
+      match: 'Real Madrid vs Barcelona',
+      tip: 'BTTS Yes',
+      odds: '1.75',
+      confidence: 'High',
+      analysis: 'El Clasico historically sees goals from both sides.'
     }
   ];
 
-  const stats = [
-    { label: 'Monthly Win Rate', value: '78%', icon: 'trending-up-outline' },
-    { label: 'Average Odds', value: '1.85', icon: 'calculator-outline' },
-    { label: 'Tips Delivered', value: '2,500+', icon: 'paper-plane-outline' },
-    { label: 'Active Subscribers', value: '850+', icon: 'people-outline' }
-  ];
+  const handleSubscribe = (tier: any) => {
+    console.log('Subscribing to tier:', tier.title);
+    setSelectedTier(tier);
+    setShowSubscriptionSheet(true);
+  };
 
   return (
-    <SafeAreaView style={commonStyles.container}>
-      <ScrollView style={commonStyles.content} showsVerticalScrollIndicator={false}>
+    <View style={commonStyles.container}>
+      <LinearGradient
+        colors={[colors.backgroundGradientStart, colors.backgroundGradientEnd]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={commonStyles.gradientBackground}
+      />
+      <SafeAreaView style={{ flex: 1 }}>
         {/* Header */}
         <View style={commonStyles.header}>
           <Link href="/" asChild>
@@ -95,217 +115,200 @@ export default function TipsScreen() {
           <View style={{ width: 60 }} />
         </View>
 
-        {/* Hero Section */}
-        <View style={[commonStyles.section, { paddingTop: 32 }]}>
-          <View style={[commonStyles.card, { backgroundColor: colors.primary, alignItems: 'center' }]}>
-            <Icon name="trending-up-outline" size={64} color={colors.background} />
-            <Text style={[commonStyles.title, { color: colors.background, textAlign: 'center', marginTop: 16 }]}>
-              Premium Daily Tips
-            </Text>
-            <Text style={[commonStyles.textSecondary, { color: colors.background, textAlign: 'center', marginTop: 8 }]}>
-              Professional betting tips with detailed analysis delivered daily to your inbox
-            </Text>
+        <ScrollView style={commonStyles.content} showsVerticalScrollIndicator={false}>
+          {/* Hero Section */}
+          <View style={[commonStyles.section, { paddingVertical: 32 }]}>
+            <View style={commonStyles.heroCard}>
+              <Icon name="trending-up-outline" size={48} color={colors.background} />
+              <Text style={[commonStyles.subtitle, { color: colors.background, textAlign: 'center', marginTop: 16 }]}>
+                Premium Betting Tips
+              </Text>
+              <Text style={[commonStyles.textSecondary, { color: colors.background, textAlign: 'center', marginTop: 8 }]}>
+                Daily expert predictions with detailed analysis and high success rates
+              </Text>
+            </View>
           </View>
-        </View>
 
-        {/* Performance Stats */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20, textAlign: 'center' }]}>
-            Our Track Record
-          </Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            {stats.map((stat, index) => (
-              <View key={index} style={[commonStyles.card, { 
-                width: '48%', 
-                alignItems: 'center', 
-                marginBottom: 16,
-                paddingVertical: 20
-              }]}>
-                <Icon name={stat.icon as any} size={32} color={colors.primary} />
-                <Text style={[commonStyles.title, { color: colors.primary, marginTop: 12 }]}>
-                  {stat.value}
-                </Text>
-                <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginTop: 4 }]}>
-                  {stat.label}
+          {/* Sample Tips */}
+          <View style={commonStyles.section}>
+            <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Today&apos;s Sample Tips</Text>
+            
+            {sampleTips.map((tip, index) => (
+              <View key={index} style={commonStyles.card}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
+                  <Text style={[commonStyles.text, { fontWeight: '600', flex: 1 }]}>
+                    {tip.match}
+                  </Text>
+                  <View style={[
+                    commonStyles.priceTag,
+                    { backgroundColor: tip.confidence === 'High' ? colors.success : colors.warning }
+                  ]}>
+                    <Text style={[commonStyles.priceText, { fontSize: 12 }]}>
+                      {tip.confidence}
+                    </Text>
+                  </View>
+                </View>
+                
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
+                  <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600' }]}>
+                    {tip.tip}
+                  </Text>
+                  <Text style={[commonStyles.text, { fontWeight: '600' }]}>
+                    Odds: {tip.odds}
+                  </Text>
+                </View>
+                
+                <Text style={commonStyles.textSecondary}>
+                  {tip.analysis}
                 </Text>
               </View>
             ))}
           </View>
-        </View>
 
-        {/* Sample Tips */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Sample Tips</Text>
-          
-          {sampleTips.map((tip, index) => (
-            <View key={index} style={[commonStyles.card, { marginBottom: 16 }]}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                <View style={{ flex: 1 }}>
-                  <Text style={[commonStyles.text, { fontWeight: '600' }]}>{tip.match}</Text>
-                  <Text style={[commonStyles.textSecondary, { marginTop: 4 }]}>{tip.sport}</Text>
-                </View>
-                <View style={[commonStyles.priceTag, { 
-                  backgroundColor: tip.confidence === 'High' ? colors.success : 
-                                  tip.confidence === 'Medium' ? colors.warning : colors.textSecondary 
-                }]}>
-                  <Text style={[commonStyles.priceText, { fontSize: 12 }]}>{tip.confidence}</Text>
-                </View>
-              </View>
-              
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                <Text style={[commonStyles.text, { fontWeight: '600', color: colors.primary }]}>
-                  {tip.tip}
-                </Text>
-                <Text style={[commonStyles.text, { fontWeight: '600' }]}>
-                  Odds: {tip.odds}
-                </Text>
-              </View>
-              
-              <Text style={commonStyles.textSecondary}>
-                {tip.analysis}
-              </Text>
-            </View>
-          ))}
-        </View>
-
-        {/* Subscription Plans */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Choose Your Plan</Text>
-          
-          {subscriptionPlans.map((plan, index) => (
-            <View key={index} style={[
-              commonStyles.serviceCard,
-              plan.popular && { borderColor: colors.primary, borderWidth: 2 }
-            ]}>
-              {plan.popular && (
-                <View style={[commonStyles.priceTag, { 
-                  position: 'absolute', 
-                  top: -10, 
-                  right: 20,
-                  backgroundColor: colors.primary
-                }]}>
-                  <Text style={[commonStyles.priceText, { fontSize: 12 }]}>POPULAR</Text>
-                </View>
-              )}
-              
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-                <View style={{ flex: 1 }}>
-                  <Text style={commonStyles.subtitle}>{plan.title}</Text>
-                  <Text style={[commonStyles.textSecondary, { marginTop: 4 }]}>
-                    {plan.description}
-                  </Text>
-                </View>
-                <Text style={[commonStyles.title, { color: colors.primary }]}>
-                  {plan.price}
-                </Text>
-              </View>
-              
-              <View style={{ marginBottom: 20 }}>
-                {plan.features.map((feature, featureIndex) => (
-                  <View key={featureIndex} style={{ 
-                    flexDirection: 'row', 
-                    alignItems: 'center', 
-                    marginBottom: 8 
+          {/* Subscription Tiers */}
+          <View style={commonStyles.section}>
+            <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Choose Your Plan</Text>
+            
+            {subscriptionTiers.map((tier) => (
+              <View key={tier.id} style={[
+                commonStyles.serviceCard,
+                tier.popular && { borderColor: colors.primary, borderWidth: 2 }
+              ]}>
+                {tier.popular && (
+                  <View style={{
+                    position: 'absolute',
+                    top: -10,
+                    right: 20,
+                    backgroundColor: colors.primary,
+                    paddingHorizontal: 12,
+                    paddingVertical: 4,
+                    borderRadius: 12,
                   }}>
-                    <Icon name="checkmark-circle-outline" size={16} color={colors.success} />
-                    <Text style={[commonStyles.textSecondary, { marginLeft: 8, flex: 1 }]}>
-                      {feature}
+                    <Text style={[commonStyles.textSecondary, { color: colors.background, fontSize: 12, fontWeight: '600' }]}>
+                      MOST POPULAR
                     </Text>
                   </View>
-                ))}
+                )}
+                
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={commonStyles.subtitle}>{tier.title}</Text>
+                  </View>
+                  <View style={{ alignItems: 'flex-end' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
+                      <Text style={[commonStyles.title, { color: colors.primary, fontSize: 24 }]}>
+                        {tier.price}
+                      </Text>
+                      <Text style={[commonStyles.textSecondary, { marginLeft: 4 }]}>
+                        {tier.period}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <Text style={[commonStyles.text, { marginBottom: 16 }]}>
+                  {tier.description}
+                </Text>
+                
+                <View style={{ marginBottom: 20 }}>
+                  {tier.features.map((feature, index) => (
+                    <View key={index} style={{ 
+                      flexDirection: 'row', 
+                      alignItems: 'center', 
+                      marginBottom: 8 
+                    }}>
+                      <Icon name="checkmark-circle-outline" size={16} color={colors.success} />
+                      <Text style={[commonStyles.textSecondary, { marginLeft: 8, flex: 1 }]}>
+                        {feature}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+                
+                <TouchableOpacity 
+                  style={[
+                    buttonStyles.primary,
+                    tier.popular && { backgroundColor: colors.primary }
+                  ]}
+                  onPress={() => handleSubscribe(tier)}
+                >
+                  <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
+                    Subscribe Now
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ))}
+          </View>
+
+          {/* Performance Stats */}
+          <View style={[commonStyles.section, { paddingVertical: 32 }]}>
+            <Text style={[commonStyles.subtitle, { textAlign: 'center', marginBottom: 24 }]}>
+              Our Track Record
+            </Text>
+            <View style={commonStyles.statsContainer}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>78%</Text>
+                  <Text style={commonStyles.textSecondary}>Win Rate</Text>
+                </View>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>2.1</Text>
+                  <Text style={commonStyles.textSecondary}>Avg Odds</Text>
+                </View>
+                <View style={commonStyles.centerContent}>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>+15%</Text>
+                  <Text style={commonStyles.textSecondary}>Monthly ROI</Text>
+                </View>
               </View>
               
-              <TouchableOpacity 
-                style={[
-                  buttonStyles.primary,
-                  plan.popular && { backgroundColor: colors.primary }
-                ]}
-                onPress={() => setIsSubscriptionSheetVisible(true)}
-              >
-                <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
-                  Subscribe Now
+              <Text style={[commonStyles.textSecondary, { textAlign: 'center' }]}>
+                Based on last 6 months performance across all subscription tiers
+              </Text>
+            </View>
+          </View>
+
+          {/* Bottom padding */}
+          <View style={{ height: 40 }} />
+        </ScrollView>
+
+        {/* Subscription Bottom Sheet */}
+        <SimpleBottomSheet
+          isVisible={showSubscriptionSheet}
+          onClose={() => setShowSubscriptionSheet(false)}
+        >
+          <View style={{ padding: 20 }}>
+            <Text style={[commonStyles.subtitle, { textAlign: 'center', marginBottom: 16 }]}>
+              Subscribe to Tips
+            </Text>
+            
+            {selectedTier && (
+              <>
+                <View style={[commonStyles.card, { marginBottom: 20 }]}>
+                  <Text style={[commonStyles.text, { fontWeight: '600', marginBottom: 8 }]}>
+                    {selectedTier.title}
+                  </Text>
+                  <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600', marginBottom: 8 }]}>
+                    {selectedTier.price}{selectedTier.period}
+                  </Text>
+                  <Text style={commonStyles.textSecondary}>
+                    {selectedTier.description}
+                  </Text>
+                </View>
+                
+                <Text style={[commonStyles.textSecondary, { textAlign: 'center', marginBottom: 20 }]}>
+                  Ready to start receiving premium betting tips? Contact us to set up your subscription and payment method.
                 </Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
-
-        {/* How It Works */}
-        <View style={commonStyles.section}>
-          <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>How It Works</Text>
-          
-          <View style={commonStyles.card}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
-              <Icon name="mail-outline" size={24} color={colors.primary} style={{ marginRight: 16 }} />
-              <View style={{ flex: 1 }}>
-                <Text style={[commonStyles.text, { fontWeight: '600' }]}>Daily Delivery</Text>
-                <Text style={commonStyles.textSecondary}>Tips delivered to your email every morning</Text>
-              </View>
-            </View>
-            
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
-              <Icon name="analytics-outline" size={24} color={colors.primary} style={{ marginRight: 16 }} />
-              <View style={{ flex: 1 }}>
-                <Text style={[commonStyles.text, { fontWeight: '600' }]}>Detailed Analysis</Text>
-                <Text style={commonStyles.textSecondary}>Each tip includes comprehensive match analysis</Text>
-              </View>
-            </View>
-            
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
-              <Icon name="phone-portrait-outline" size={24} color={colors.primary} style={{ marginRight: 16 }} />
-              <View style={{ flex: 1 }}>
-                <Text style={[commonStyles.text, { fontWeight: '600' }]}>Mobile Access</Text>
-                <Text style={commonStyles.textSecondary}>Access tips anytime through our mobile app</Text>
-              </View>
-            </View>
-            
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon name="bar-chart-outline" size={24} color={colors.primary} style={{ marginRight: 16 }} />
-              <View style={{ flex: 1 }}>
-                <Text style={[commonStyles.text, { fontWeight: '600' }]}>Performance Tracking</Text>
-                <Text style={commonStyles.textSecondary}>Track your wins and losses with detailed statistics</Text>
-              </View>
-            </View>
+                
+                <TouchableOpacity style={buttonStyles.primary}>
+                  <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
+                    Start Subscription
+                  </Text>
+                </TouchableOpacity>
+              </>
+            )}
           </View>
-        </View>
-
-        {/* Bottom padding */}
-        <View style={{ height: 40 }} />
-      </ScrollView>
-
-      {/* Subscription Bottom Sheet */}
-      <SimpleBottomSheet
-        isVisible={isSubscriptionSheetVisible}
-        onClose={() => setIsSubscriptionSheetVisible(false)}
-      >
-        <View style={{ padding: 20 }}>
-          <Text style={[commonStyles.subtitle, { textAlign: 'center', marginBottom: 20 }]}>
-            Start Your Subscription
-          </Text>
-          
-          <View style={[commonStyles.card, { backgroundColor: colors.backgroundAlt, marginBottom: 20 }]}>
-            <Icon name="gift-outline" size={32} color={colors.primary} style={{ alignSelf: 'center', marginBottom: 12 }} />
-            <Text style={[commonStyles.text, { textAlign: 'center', marginBottom: 8, fontWeight: '600' }]}>
-              7-Day Free Trial
-            </Text>
-            <Text style={[commonStyles.textSecondary, { textAlign: 'center' }]}>
-              Try our premium tips for free. Cancel anytime during the trial period.
-            </Text>
-          </View>
-          
-          <TouchableOpacity style={[buttonStyles.primary, { marginBottom: 12 }]}>
-            <Text style={[commonStyles.text, { color: colors.background, fontWeight: '600' }]}>
-              Start Free Trial
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={buttonStyles.outline}>
-            <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600' }]}>
-              View Sample Tips
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </SimpleBottomSheet>
-    </SafeAreaView>
+        </SimpleBottomSheet>
+      </SafeAreaView>
+    </View>
   );
 }
