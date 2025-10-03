@@ -134,7 +134,7 @@ export default function HomeScreen() {
             <View style={commonStyles.statsContainer}>
               <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                 <View style={commonStyles.centerContent}>
-                  <Text style={[commonStyles.title, { color: colors.primary }]}>500+</Text>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>100+</Text>
                   <Text style={commonStyles.textSecondary}>Students Trained</Text>
                 </View>
                 <View style={commonStyles.centerContent}>
@@ -142,7 +142,7 @@ export default function HomeScreen() {
                   <Text style={commonStyles.textSecondary}>Success Rate</Text>
                 </View>
                 <View style={commonStyles.centerContent}>
-                  <Text style={[commonStyles.title, { color: colors.primary }]}>5+</Text>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>15+</Text>
                   <Text style={commonStyles.textSecondary}>Years Experience</Text>
                 </View>
               </View>
