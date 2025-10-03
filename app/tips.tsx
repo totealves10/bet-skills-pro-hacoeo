@@ -16,14 +16,13 @@ export default function TipsScreen() {
     {
       id: 'basic',
       title: 'Basic Tips',
-      price: '$29',
+      price: '29€',
       period: '/month',
       description: 'Essential daily betting tips with basic analysis',
       features: [
-        '3-5 daily tips',
-        'Basic match analysis',
+        '2-4 daily tips',
         'Win/Loss tracking',
-        'Email delivery',
+        'Telegram delivery',
         'Mobile notifications'
       ],
       popular: false
@@ -31,12 +30,11 @@ export default function TipsScreen() {
     {
       id: 'premium',
       title: 'Premium Tips',
-      price: '$59',
+      price: '59€',
       period: '/month',
       description: 'Advanced tips with detailed analysis and multiple sports',
       features: [
-        '8-12 daily tips',
-        'Detailed statistical analysis',
+        '4-8 daily tips',
         'Multiple sports coverage',
         'Live updates',
         'Telegram group access',
@@ -48,12 +46,12 @@ export default function TipsScreen() {
     {
       id: 'vip',
       title: 'VIP Package',
-      price: '$99',
+      price: '99€',
       period: '/month',
       description: 'Premium tips plus exclusive access and personal support',
       features: [
         'Everything in Premium',
-        '15+ daily tips',
+        '10+ daily tips',
         'Exclusive high-value bets',
         'Personal WhatsApp support',
         'Live betting guidance',
