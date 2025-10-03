@@ -66,7 +66,7 @@ export default function HomeScreen() {
                 Transform Your Betting Game
               </Text>
               <Text style={[commonStyles.textSecondary, { color: colors.background, textAlign: 'center', marginTop: 8 }]}>
-                Join thousands of successful bettors who have improved their skills with our proven methods
+                Join our community of successful bettors who have improved their skills with our proven methods
               </Text>
             </View>
           </View>
