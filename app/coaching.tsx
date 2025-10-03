@@ -32,7 +32,7 @@ export default function CoachingScreen() {
     {
       id: 'advanced',
       title: 'Advanced Strategy',
-      price: '$199',
+      price: '199€',
       duration: '2 hours',
       description: 'Deep dive into advanced betting strategies and market analysis',
       features: [
@@ -49,7 +49,7 @@ export default function CoachingScreen() {
     {
       id: 'premium',
       title: 'Premium Mentorship',
-      price: '$399',
+      price: '399€',
       duration: '4 hours',
       description: 'Comprehensive mentorship program with ongoing support',
       features: [
