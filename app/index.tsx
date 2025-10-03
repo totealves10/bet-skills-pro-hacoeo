@@ -11,9 +11,9 @@ export default function HomeScreen() {
   const services = [
     {
       id: 'coaching',
-      title: 'Individual Coaching',
+      title: 'Individual Coaching', 
       description: 'One-on-one personalized betting strategy sessions with expert guidance',
-      price: '$99/session',
+      price: '99€/session',
       icon: 'person-outline',
       features: ['Personalized strategy', '1-hour session', 'Follow-up support', 'Risk management'],
       route: '/coaching'
