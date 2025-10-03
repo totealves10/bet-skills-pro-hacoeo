@@ -22,16 +22,16 @@ export default function HomeScreen() {
       id: 'tips',
       title: 'Daily Bet Tips',
       description: 'Premium daily betting tips to give you an edge every day.',
-      price: '$29/month',
+      price: '29€/month',
       icon: 'trending-up-outline',
-      features: ['Daily tips', 'Detailed analysis', 'Win rate tracking', 'Multiple sports'],
+      features: ['Daily tips', 'Detailed quotas', 'Win rate tracking', 'Multiple sports'],
       route: '/tips'
     },
     {
       id: 'theory',
       title: 'Betting Theory Course',
       description: 'Comprehensive course covering all aspects of professional betting',
-      price: '$149/course',
+      price: '149€/course',
       icon: 'school-outline',
       features: ['Video lessons', 'PDF materials', 'Quizzes', 'Certificate'],
       route: '/theory'
