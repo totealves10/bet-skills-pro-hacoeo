@@ -16,7 +16,7 @@ export default function CoachingScreen() {
     {
       id: 'starter',
       title: 'Starter Session',
-      price: '$99',
+      price: '99€',
       duration: '1 hour',
       description: 'Perfect for beginners looking to understand the basics of professional betting',
       features: [
@@ -194,7 +194,7 @@ export default function CoachingScreen() {
                   </Text>
                 </View>
                 <Text style={commonStyles.textSecondary}>
-                  Learn from professionals with 5+ years of successful betting experience
+                  Learn from professionals with 15+ years of successful betting experience
                 </Text>
               </View>
               
@@ -206,7 +206,7 @@ export default function CoachingScreen() {
                   </Text>
                 </View>
                 <Text style={commonStyles.textSecondary}>
-                  Our students see an average 40% improvement in their betting performance
+                  Our students see an average 40%+ improvement in their betting performance
                 </Text>
               </View>
               
