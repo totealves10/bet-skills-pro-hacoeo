@@ -21,7 +21,7 @@ export default function HomeScreen() {
     {
       id: 'tips',
       title: 'Daily Bet Tips',
-      description: 'Premium daily betting tips with detailed analysis and predictions',
+      description: 'Receive reliable daily betting predictions and tips designed to increase your chances of winning, all in one convenient place',
       price: '$29/month',
       icon: 'trending-up-outline',
       features: ['Daily tips', 'Detailed analysis', 'Win rate tracking', 'Multiple sports'],
