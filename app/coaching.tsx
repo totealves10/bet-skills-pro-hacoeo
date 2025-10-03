@@ -206,7 +206,7 @@ export default function CoachingScreen() {
                   </Text>
                 </View>
                 <Text style={commonStyles.textSecondary}>
-                  Our students see an average 40%+ improvement in their betting performance
+                  Our students see an average 40% improvement in their betting performance
                 </Text>
               </View>
               

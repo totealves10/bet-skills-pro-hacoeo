@@ -64,6 +64,7 @@ export default function TipsScreen() {
     }
   ];
 
+  /*
   const sampleTips = [
     {
       match: 'Manchester United vs Liverpool',
@@ -87,7 +88,7 @@ export default function TipsScreen() {
       analysis: 'El Clasico historically sees goals from both sides.'
     }
   ];
-
+*/
   const handleSubscribe = (tier: any) => {
     console.log('Subscribing to tier:', tier.title);
     setSelectedTier(tier);
@@ -128,8 +129,9 @@ export default function TipsScreen() {
               </Text>
             </View>
           </View>
-
           {/* Sample Tips */}
+          
+          {/* 
           <View style={commonStyles.section}>
             <Text style={[commonStyles.subtitle, { marginBottom: 20 }]}>Today&apos;s Sample Tips</Text>
             
@@ -164,6 +166,8 @@ export default function TipsScreen() {
               </View>
             ))}
           </View>
+
+          /}
 
           {/* Subscription Tiers */}
           <View style={commonStyles.section}>
