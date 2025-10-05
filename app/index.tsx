@@ -31,7 +31,7 @@ export default function HomeScreen() {
       id: 'theory',
       title: 'Betting Theory Course',
       description: 'Comprehensive course covering all aspects of professional betting',
-      price: '149€/course',
+      price: '249€/course',
       icon: 'school-outline',
       features: ['Video lessons', 'PDF materials', 'Quizzes', 'Certificate'],
       route: '/theory'

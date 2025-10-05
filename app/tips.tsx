@@ -254,7 +254,7 @@ export default function TipsScreen() {
                   <Text style={commonStyles.textSecondary}>Win Rate</Text>
                 </View>
                 <View style={commonStyles.centerContent}>
-                  <Text style={[commonStyles.title, { color: colors.primary }]}>2.1</Text>
+                  <Text style={[commonStyles.title, { color: colors.primary }]}>1.85</Text>
                   <Text style={commonStyles.textSecondary}>Avg Odds</Text>
                 </View>
                 <View style={commonStyles.centerContent}>
