@@ -253,7 +253,7 @@ export default function TheoryScreen() {
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                   <Text style={[commonStyles.title, { color: colors.primary, fontSize: 32 }]}>
-                    $149
+                    249€
                   </Text>
                   <Text style={[commonStyles.textSecondary, { marginLeft: 8 }]}>
                     one-time payment
@@ -267,11 +267,9 @@ export default function TheoryScreen() {
                 </Text>
                 {[
                   'Lifetime access to all modules',
-                  'HD video lessons',
                   'Downloadable PDF materials',
                   'Interactive quizzes',
                   'Certificate of completion',
-                  'Private student community',
                   'Monthly live Q&A sessions'
                 ].map((feature, index) => (
                   <View key={index} style={{ 
