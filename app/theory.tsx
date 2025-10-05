@@ -17,7 +17,7 @@ export default function TheoryScreen() {
       id: 1,
       title: 'Betting Fundamentals',
       duration: '2 hours',
-      lessons: 8,
+      
       description: 'Learn the basic concepts and terminology of sports betting',
       topics: [
         'Understanding odds and probability',
@@ -253,7 +253,7 @@ export default function TheoryScreen() {
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
                   <Text style={[commonStyles.title, { color: colors.primary, fontSize: 32 }]}>
-                    $149
+                    249€
                   </Text>
                   <Text style={[commonStyles.textSecondary, { marginLeft: 8 }]}>
                     one-time payment
@@ -317,7 +317,7 @@ export default function TheoryScreen() {
                 Betting Theory Complete Course
               </Text>
               <Text style={[commonStyles.text, { color: colors.primary, fontWeight: '600', marginBottom: 8 }]}>
-                $149 - One-time payment
+                249€ - One-time payment
               </Text>
               <Text style={commonStyles.textSecondary}>
                 Lifetime access to all {courseStats.totalLessons} lessons across {courseStats.totalModules} modules
